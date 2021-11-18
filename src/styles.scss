@@ -1,0 +1,33 @@
+/* You can add global styles to this file, and also import other style files */
+a {
+    text-decoration: none;
+    &:visited,
+    &:hover {
+        // color: #1976d2;
+        text-decoration: none;
+    }
+}
+
+.spacer {
+    flex: 1;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 8px 0;
+}
+
+p {
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 16px;
+}
