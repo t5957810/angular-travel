@@ -2,8 +2,8 @@ import { map, tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { ResponseData } from '../attractions/model/responseData.interface';
 import { AttractionsService } from '../attractions/attractions.service';
+import { Attraction } from '../attractions/model/attraction.class';
 
 
 @Injectable({
@@ -15,11 +15,11 @@ export class DataStorageService {
 
   fetchAttractions() {
     return this.http.get(environment.defaultAPI).pipe(
-      map(data => data['result']),
-      tap((responseData: ResponseData) => {
-        const records = responseData.records;
-        records.shift();
-        this.attractionsService.setAttractions(records);
+      map(data => data['result'].records),
+      tap((attractionList: Attraction[]) => {
+        attractionList.shift();  // 把第一個多餘的移除
+        const list = attractionList.map(each => new Attraction(each.Company, each.The_county));
+        this.attractionsService.setAttractions(list);
       })
     );
   }

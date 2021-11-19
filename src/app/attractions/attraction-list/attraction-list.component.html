@@ -1,12 +1,15 @@
 <ng-container *ngIf="attractions.length > 0;else noData">
     <div class="dropdown">
-        <button class="btn btn-primary" type="button" appDropdown #r="appDropdown">
+        <button class="btn btn-primary" margin-right type="button" appDropdown #r="appDropdown">
             {{ (selectedCounty === '') ? '全部縣市' : selectedCounty }}
         </button>
         <ul class="dropdown-menu" [ngClass]="(r.isDropdownOpen) ? 'show' : ''">
             <li *ngFor="let county of countys"><a class="dropdown-item" (click)="selectCounty(county)">{{ county }}</a>
             </li>
         </ul>
+        <button class="btn btn-primary" type="button" (click)="addFavorites()">
+            加到我的最愛
+        </button>
     </div>
 
     <ul class="list-group">
@@ -18,11 +21,13 @@
             <app-attraction-item [attractionData]="attraction" [attractionIndex]="i">
             </app-attraction-item>
         </li>
+
         <nav>
             <ul class="pagination">
                 <li class="page-item"><a class="page-link" (click)="changePage('previous')">Previous</a></li>
                 <div class="d-flex overflow-x">
-                    <li class="page-item" [ngClass]="{'active': page === pageStart}" *ngFor="let page of pageList">
+                    <li class="page-item" [ngClass]="{'active': page === pagination.pageStart}" 
+                    *ngFor="let page of pagination.pageList">
                         <a class="page-link" (click)="changePage('change', page)">{{ page }}</a>
                     </li>
                 </div>

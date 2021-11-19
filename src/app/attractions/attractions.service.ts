@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { FavoritesService } from '../favorites/favorites.service';
 import { AppConstant } from '../shared/model/app-constant';
 import { Attraction } from './model/attraction.class';
 
@@ -10,7 +11,7 @@ export class AttractionsService {
   attractions: Attraction[] = [];
   attractionsChanged$ = new Subject<Attraction[]>();
 
-  constructor() { }
+  constructor(private favoritesService: FavoritesService) { }
 
   getAttractions(): Attraction[] {
     return this.attractions.slice();
@@ -30,5 +31,9 @@ export class AttractionsService {
   setAttractions(attractions: Attraction[]) {
     this.attractions = attractions;
     this.attractionsChanged$.next(this.getAttractions());
+  }
+
+  addAttractionsToFavoritesList(attractions: Attraction[]) {
+     this.favoritesService.addFavoritesAttractions(attractions);
   }
 }

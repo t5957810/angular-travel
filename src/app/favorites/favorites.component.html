@@ -1,1 +1,23 @@
-<p>favorites works!</p>
+ <ul class="list-group" *ngIf="favoritesAttractions.length > 0; else noData">
+     <li class="list-group-item d-flex justify-content-between">
+         <h4>單位名稱</h4>
+         <h4>縣市</h4>
+     </li>
+     <li class="list-group-item" *ngFor="let attraction of filteredPageAttractions; let i = index;">
+         <span>{{ attraction.Company }}</span>
+         <span>{{ attraction.The_county }}</span>
+     </li>
+        <nav>
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" (click)="changePage('previous')">Previous</a></li>
+                <div class="d-flex overflow-x">
+                    <li class="page-item" [ngClass]="{'active': page === pagination.pageStart}" 
+                    *ngFor="let page of pagination.pageList">
+                        <a class="page-link" (click)="changePage('change', page)">{{ page }}</a>
+                    </li>
+                </div>
+                <li class="page-item"><a class="page-link" (click)="changePage('next')">Next</a></li>
+            </ul>
+        </nav>
+ </ul>
+ <ng-template #noData>本地端尚未有儲存之資料。</ng-template>

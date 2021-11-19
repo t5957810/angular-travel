@@ -6,7 +6,6 @@ import { SharedModule } from '../shared/shared.module';
 import { AttractionListComponent } from './attraction-list/attraction-list.component';
 import { AttractionItemComponent } from './attraction-item/attraction-item.component';
 
-
 @NgModule({
   declarations: [
     AttractionsComponent,
@@ -16,6 +15,6 @@ import { AttractionItemComponent } from './attraction-item/attraction-item.compo
   imports: [
     SharedModule,
     AttractionsRoutingModule
-  ]
+  ],
 })
 export class AttractionsModule { }
