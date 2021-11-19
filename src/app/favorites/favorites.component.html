@@ -1,6 +1,10 @@
 <ng-container *ngIf="favoritesAttractions.length > 0; else noData">
-    <button class="btn btn-primary" type="button" (click)="onClear()">
+    <button class="btn btn-danger" type="button" (click)="onClear()" margin-right>
         清除本地端資料
+    </button>
+
+    <button class="btn btn-danger" type="button" (click)="onRemoveFavoritesAttractions()">
+        從我的最愛中移除
     </button>
 
     <form #f="ngForm" class="overflow-x">

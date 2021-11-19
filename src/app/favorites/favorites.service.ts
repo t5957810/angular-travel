@@ -23,7 +23,7 @@ export class FavoritesService {
   addFavoritesAttractions(attractions: Attraction[]) {
     this.favoritesAttractions.push(...attractions);
     this.favoritesAttractionsChanged$.next(this.getFavoritesAttractions());
-    localStorage.setItem('favoritesData', JSON.stringify(this.favoritesAttractions));
+    this.setLocalStorage();
   }
 
   autoGetFavoritesAttractions() {
@@ -34,9 +34,24 @@ export class FavoritesService {
     this.setFavoritesAttractions(favoritesData);
   }
 
+  // 把isSelected 是true的移除
+  removeFavoritesAttractions() {
+    const notSelectedFavoritesAttractions = this.favoritesAttractions.filter((item: Attraction) => !item.isSelected);
+    this.setFavoritesAttractions(notSelectedFavoritesAttractions);
+    this.updateLocalStorage();
+  }
+
+  setLocalStorage() {
+    localStorage.setItem('favoritesData', JSON.stringify(this.favoritesAttractions));
+  }
+
+  updateLocalStorage() {
+    this.clearLocalStorage();
+    this.setLocalStorage();
+  }
+
   clearLocalStorage() {
     localStorage.removeItem('favoritesData');
-    this.favoritesAttractionsChanged$.next(this.getFavoritesAttractions());
   }
 
 }

@@ -1,19 +1,21 @@
 <ng-container *ngIf="attractions.length > 0;else noData">
     <div class="dropdown">
-        <button class="btn btn-primary" margin-right type="button" appDropdown #r="appDropdown">
-            {{ selectedDistict }}
-        </button>
+        <div class="inline-block" appDropdown #r="appDropdown" margin-right>
+            <input [(ngModel)]="selectedDistict" />
+        </div>
+        <div class="inline-block">
+            <button class="btn btn-primary" type="button" (click)="addFavorites()">
+                加到我的最愛
+            </button>
+            <button class="btn btn-primary" type="button" (click)="log()">
+                log
+            </button>
+        </div>
         <ul class="dropdown-menu" [ngClass]="(r.isDropdownOpen) ? 'show' : ''">
             <li *ngFor="let distict of disticts"><a class="dropdown-item"
                     (click)="selectCounty(distict)">{{ distict }}</a>
             </li>
         </ul>
-        <button class="btn btn-primary" type="button" (click)="addFavorites()">
-            加到我的最愛
-        </button>
-        <button class="btn btn-primary" type="button" (click)="log()">
-            log
-        </button>
     </div>
 
     <form #f="ngForm" class="overflow-x">
@@ -32,8 +34,8 @@
             <tbody>
                 <tr *ngFor="let attraction of filteredPageAttractions; let i = index;">
                     <td>
-                        <input type="checkbox" [checked]="attraction.isSelected" name="id{{ i }}" ngModel
-                            [(ngModel)]="attraction.isSelected">
+                        <input type="checkbox" [checked]="attraction.isSelected" name="id{{ i }}" 
+                        ngModel [(ngModel)]="attraction.isSelected">
                     </td>
                     <td> <span>{{ attraction.name }}</span></td>
                     <td><span>{{ attraction.distict }}</span></td>

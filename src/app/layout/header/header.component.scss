@@ -8,21 +8,26 @@
     ul {
         display: flex;
         flex-direction: row;
-        align-items: center;
         padding: 0;
         margin: 0;
     }
 
     li {
         list-style-type: none;
+        height: 60px;
     }
 
     a {
         color: #fff;
-        margin: 0 4px;
-        padding: 8px;
+        height: 100%;
+        line-height: 60px;
+        padding: 0 8px 0 8px;
+        display: block;
         &:hover {
             background: rgba(255,255,255, 0.15);
+        }
+        &.active {
+            background: rgba(255, 255, 255, 0.45);
         }
     }
 

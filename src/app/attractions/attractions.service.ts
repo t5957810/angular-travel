@@ -23,7 +23,7 @@ export class AttractionsService {
   }
 
   get disticts() {
-    const disticts = this.attractions.map((item: Attraction) => item.distict);
+    const disticts = [...new Set(this.attractions.map((item: Attraction) => item.distict))];
     disticts.unshift(AppConstant.ALL_DISTICT);
     return disticts;
   }

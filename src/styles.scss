@@ -82,6 +82,11 @@ $defaultWidth: 16px;
     background-color: #0d6efd;
     border-color: #0d6efd;
 }
+.btn-danger {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
 
 .dropdown-menu {
     position: absolute;
@@ -172,6 +177,9 @@ $defaultWidth: 16px;
 
 %shadow, .shadow {
     box-shadow: 0px 2px 24px rgb(88 118 132 / 51%);
+}
+.inline-block {
+    display: inline-block !important;
 }
 
 .table {

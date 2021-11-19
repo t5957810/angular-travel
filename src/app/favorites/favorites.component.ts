@@ -1,5 +1,5 @@
 import { FavoritesService } from './favorites.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Attraction } from '../attractions/model/attraction.class';
 import { Subscription } from 'rxjs';
 import { Pagination } from '../shared/model/pagination.class';
@@ -9,7 +9,7 @@ import { Pagination } from '../shared/model/pagination.class';
   templateUrl: './favorites.component.html',
   styleUrls: ['./favorites.component.scss']
 })
-export class FavoritesComponent implements OnInit {
+export class FavoritesComponent implements OnInit, OnDestroy {
   favoritesAttractions: Attraction[] = [];
   filteredAttractions: Attraction[] = [];
   filteredPageAttractions: Attraction[] = [];
@@ -28,6 +28,10 @@ export class FavoritesComponent implements OnInit {
         this.favoritesAttractions = attractions;
         this.initAttractions();
       })
+  }
+
+  ngOnDestroy() {
+    this.favoritesAttractionsSubscription$.unsubscribe();
   }
 
   initAttractions() {
@@ -56,6 +60,10 @@ export class FavoritesComponent implements OnInit {
 
   onClear() {
     this.favoritesService.clearLocalStorage();
+  }
+
+  onRemoveFavoritesAttractions() {
+    this.favoritesService.removeFavoritesAttractions();
   }
 
 }
