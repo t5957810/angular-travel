@@ -34,4 +34,9 @@ export class FavoritesService {
     this.setFavoritesAttractions(favoritesData);
   }
 
+  clearLocalStorage() {
+    localStorage.removeItem('favoritesData');
+    this.favoritesAttractionsChanged$.next(this.getFavoritesAttractions());
+  }
+
 }

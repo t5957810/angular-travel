@@ -1,4 +1,4 @@
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -15,13 +15,11 @@ export class DataStorageService {
 
   fetchAttractions() {
     return this.http.get(environment.defaultAPI).pipe(
-      map(data => data['result'].records),
       tap((attractionList: Attraction[]) => {
-        attractionList.shift();  // 把第一個多餘的移除
-        const list = attractionList.map(each => new Attraction(each.Company, each.The_county));
+        const list = attractionList.map((each: Attraction) =>
+          new Attraction(each.address, each.distict, each.floors, each.houseHolds, each.lat, each.lng, each.name, each.persons, each.progress));
         this.attractionsService.setAttractions(list);
       })
     );
   }
-
 }

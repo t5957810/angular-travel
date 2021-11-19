@@ -54,4 +54,8 @@ export class FavoritesComponent implements OnInit {
     this.filterAttractions(this.filteredAttractions);
   }
 
+  onClear() {
+    this.favoritesService.clearLocalStorage();
+  }
+
 }

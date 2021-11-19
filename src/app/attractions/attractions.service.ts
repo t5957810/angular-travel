@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { FavoritesService } from '../favorites/favorites.service';
 import { AppConstant } from '../shared/model/app-constant';
+import { ShareUtil } from '../shared/model/shareUtil.class';
 import { Attraction } from './model/attraction.class';
 
 @Injectable({
@@ -21,11 +22,10 @@ export class AttractionsService {
     return this.attractions[iddex];
   }
 
-
-  get countys() {
-    const counties = this.attractions.map((item: Attraction) => item.The_county);
-    counties.unshift(AppConstant.ALL_COUNTRY);
-    return counties;
+  get disticts() {
+    const disticts = this.attractions.map((item: Attraction) => item.distict);
+    disticts.unshift(AppConstant.ALL_DISTICT);
+    return disticts;
   }
 
   setAttractions(attractions: Attraction[]) {
@@ -34,6 +34,11 @@ export class AttractionsService {
   }
 
   addAttractionsToFavoritesList(attractions: Attraction[]) {
-     this.favoritesService.addFavoritesAttractions(attractions);
+    this.favoritesService.addFavoritesAttractions(ShareUtil.unselectedAttractions(attractions));
+  }
+
+  resetSelectState() {
+    this.attractions = ShareUtil.unselectedAttractions(this.attractions);
+    this.attractionsChanged$.next(this.getAttractions());
   }
 }

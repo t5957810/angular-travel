@@ -15,12 +15,11 @@ export class AttractionListComponent implements OnInit, OnDestroy {
   attractions: Attraction[] = [];
   filteredAttractions: Attraction[] = [];
   filteredPageAttractions: Attraction[] = [];
-  countys: string[] = [];
+  disticts: string[] = [];
   attractionsSubscription$: Subscription;
   pagination = new Pagination();
 
-
-  selectedCounty = AppConstant.ALL_COUNTRY;
+  selectedDistict = AppConstant.ALL_DISTICT;
 
   constructor(private attractionsService: AttractionsService) { }
 
@@ -35,12 +34,12 @@ export class AttractionListComponent implements OnInit, OnDestroy {
       })
   }
 
-  selectCounty(county: string) {
-    this.selectedCounty = county;
+  selectCounty(distict: string) {
+    this.selectedDistict = distict;
     this.pagination.resetPageStart();
     this.filteredAttractions = this.attractions.filter((item) => {
-      if(this.selectedCounty !== AppConstant.ALL_COUNTRY) {
-        return (item.The_county === this.selectedCounty);
+      if (this.selectedDistict !== AppConstant.ALL_DISTICT) {
+        return (item.distict === this.selectedDistict);
       }
       return item;
     });
@@ -54,8 +53,8 @@ export class AttractionListComponent implements OnInit, OnDestroy {
     const itemStart = this.pagination.itemStart;
 
     this.filteredPageAttractions = attractions.filter((item, index) => {
-      if(this.selectedCounty !== AppConstant.ALL_COUNTRY) {
-        return (item.The_county === this.selectedCounty && index >= itemStart && index < itemEnd);
+      if (this.selectedDistict !== AppConstant.ALL_DISTICT) {
+        return (item.distict === this.selectedDistict && index >= itemStart && index < itemEnd);
       }
       return (index >= itemStart && index < itemEnd);
     });
@@ -68,11 +67,11 @@ export class AttractionListComponent implements OnInit, OnDestroy {
   initAttractions() {
     this.filteredAttractions = this.attractions;
     this.buildPageList(this.filteredAttractions);
-    this.countys = this.attractionsService.countys;
+    this.disticts = this.attractionsService.disticts;
     this.filterAttractions(this.filteredAttractions);
   }
 
-  changePage(action: string, page: number= null) {
+  changePage(action: string, page: number = null) {
     this.pagination.alterPage(action, page);
     this.filterAttractions(this.filteredAttractions);
   }
@@ -84,6 +83,11 @@ export class AttractionListComponent implements OnInit, OnDestroy {
   addFavorites() {
     const favorites = _.cloneDeep(this.filteredAttractions).filter((item: Attraction) => item.isSelected);
     this.attractionsService.addAttractionsToFavoritesList(favorites);
+    this.attractionsService.resetSelectState();
+  }
+
+  log() {
+    console.log('filteredAttractions= ', this.filteredAttractions);
   }
 
 }
