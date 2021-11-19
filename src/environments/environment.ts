@@ -2,8 +2,10 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+
 export const environment = {
-  production: false
+  production: false,
+  defaultAPI: 'https://od.moi.gov.tw/api/v1/rest/datastore/301000000A-000781-019'
 };
 
 /*

@@ -1,3 +1,5 @@
+
 export const environment = {
-  production: true
+  production: true,
+  defaultAPI: 'https://www.hms.gov.taipei/api/BigData/project'
 };

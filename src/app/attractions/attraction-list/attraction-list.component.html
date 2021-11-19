@@ -1,1 +1,34 @@
-<p>attraction-list works!</p>
+<ng-container *ngIf="attractions.length > 0;else noData">
+    <div class="dropdown">
+        <button class="btn btn-primary" type="button" appDropdown #r="appDropdown">
+            {{ (selectedCounty === '') ? '全部縣市' : selectedCounty }}
+        </button>
+        <ul class="dropdown-menu" [ngClass]="(r.isDropdownOpen) ? 'show' : ''">
+            <li *ngFor="let county of countys"><a class="dropdown-item" (click)="selectCounty(county)">{{ county }}</a>
+            </li>
+        </ul>
+    </div>
+
+    <ul class="list-group">
+        <li class="list-group-item d-flex justify-content-between">
+            <h4>單位名稱</h4>
+            <h4>縣市</h4>
+        </li>
+        <li class="list-group-item" *ngFor="let attraction of filteredPageAttractions; let i = index;">
+            <app-attraction-item [attractionData]="attraction" [attractionIndex]="i">
+            </app-attraction-item>
+        </li>
+        <nav>
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" (click)="changePage('previous')">Previous</a></li>
+                <div class="d-flex overflow-x">
+                    <li class="page-item" [ngClass]="{'active': page === pageStart}" *ngFor="let page of pageList">
+                        <a class="page-link" (click)="changePage('change', page)">{{ page }}</a>
+                    </li>
+                </div>
+                <li class="page-item"><a class="page-link" (click)="changePage('next')">Next</a></li>
+            </ul>
+        </nav>
+    </ul>
+</ng-container>
+<ng-template #noData>沒有資料。</ng-template>
