@@ -14,7 +14,7 @@ export class DataStorageService {
   constructor(private http: HttpClient, private attractionsService: AttractionsService) { }
 
   fetchAttractions() {
-    return this.http.get(environment.defaultAPI).pipe(
+    return this.http.get<Attraction[]>(environment.defaultAPI).pipe(
       tap((attractionList: Attraction[]) => {
         const list = attractionList.map((each: Attraction) =>
           new Attraction(

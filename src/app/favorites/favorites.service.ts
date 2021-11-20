@@ -58,6 +58,7 @@ export class FavoritesService {
 
   clearLocalStorage() {
     localStorage.removeItem('favoritesData');
+    this.setFavoritesAttractions([]);
   }
 
 }

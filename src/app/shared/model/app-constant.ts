@@ -9,7 +9,7 @@ export enum Common {
   EDIT= '編輯',
   SAVE= '儲存',
   PLEASE_ENTER= '請輸入',
-  CLEAR_LOCAL_STORAGE= '清除本地端資料',
+  CLEAR_LOCAL_STORAGE= '清除本地端所有資料',
   REMOVE_FROM_FAVORITES= '從我的最愛中移除',
   NO_LOCAL_STORAGE_DATA= '本地端尚未有儲存之資料。',
   NO_DATA= '沒有資料。'
