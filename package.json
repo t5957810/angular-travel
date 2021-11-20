@@ -4,7 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod --base-href https://t5957810.github.io/angular-travel-demo/",
+    "build": "ng build",
+    "github": "ng build --prod --base-href https://t5957810.github.io/angular-travel-demo/ && npm run create404page",
+    "create404page": "cp dist/index.html dist/404.html",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
