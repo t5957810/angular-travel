@@ -5,17 +5,16 @@ import {
   HttpHandler,
   HttpInterceptor,
 } from '@angular/common/http';
-import { AppConstant } from '../shared/model/app-constant';
-
+import * as AppConstant from '../shared/model/app-constant';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-
+  appConstant = AppConstant;
   constructor() {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler) {
     const modifiedRequest = request.clone({
-      url: AppConstant.CORS_ANYWHERE + `${request.url}`
+      url: this.appConstant.Common.CORS_ANYWHERE + `${request.url}`
     });
     return next.handle(modifiedRequest);
   }

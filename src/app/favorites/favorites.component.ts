@@ -1,11 +1,12 @@
 import { FavoritesService } from './favorites.service';
 import { Component, ComponentFactoryResolver, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Attraction } from '../attractions/model/attraction.class';
-import { Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
 import { Pagination } from '../shared/model/pagination.class';
-import { AppConstant, AttractionText } from '../shared/model/app-constant';
+import * as AppConstant from '../shared/model/app-constant';
 import { ModalComponent } from '../shared/component/modal/modal.component';
 import { PlaceholderDirective } from '../shared/directive/placeholder.directive';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-favorites',
@@ -13,17 +14,16 @@ import { PlaceholderDirective } from '../shared/directive/placeholder.directive'
   styleUrls: ['./favorites.component.scss']
 })
 export class FavoritesComponent implements OnInit, OnDestroy {
-  title = AppConstant.FAVORITES;
+  appConstant = AppConstant;
+  title = this.appConstant.Common.FAVORITES;
   favoritesAttractions: Attraction[] = [];
   filteredAttractions: Attraction[] = [];
   filteredPageAttractions: Attraction[] = [];
 
   @ViewChild(PlaceholderDirective) modalHost: PlaceholderDirective;
-  closeSub$: Subscription;
 
-  favoritesAttractionsSubscription$: Subscription;
+  destory = new Subject();
   pagination = new Pagination();
-  attractionText = AttractionText;
 
   constructor(
     private favoritesService: FavoritesService,
@@ -33,7 +33,8 @@ export class FavoritesComponent implements OnInit, OnDestroy {
     this.favoritesAttractions = this.favoritesService.getFavoritesAttractions();
     this.initAttractions();
 
-    this.favoritesAttractionsSubscription$ = this.favoritesService.favoritesAttractionsChanged$
+    this.favoritesService.favoritesAttractionsChanged$
+      .pipe(takeUntil(this.destory))
       .subscribe((attractions: Attraction[]) => {
         this.favoritesAttractions = attractions;
         this.initAttractions();
@@ -41,7 +42,8 @@ export class FavoritesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.favoritesAttractionsSubscription$.unsubscribe();
+    this.destory.next();
+    this.destory.complete();
   }
 
   onEdit(attraction: Attraction, index: number) {
@@ -52,17 +54,12 @@ export class FavoritesComponent implements OnInit, OnDestroy {
     const componentRef = hostViewContainerRef.createComponent(modalComponentFactory);
     componentRef.instance.formData = attraction;
 
-    this.closeSub$ = componentRef.instance.close$.subscribe((formData: Attraction) => {
+    componentRef.instance.close$.pipe(takeUntil(this.destory)).subscribe((formData: Attraction) => {
       if (formData) {
-        const itemEnd = this.pagination.itemEnd;
         const itemStart = this.pagination.itemStart;
-        console.log(itemStart, ', ', itemEnd)
         const realIndex = index + itemStart;
-        console.log('realIndex= ', realIndex)
-
         this.favoritesService.updateFavoritesAttraction(realIndex, formData);
       }
-      this.closeSub$.unsubscribe();
       hostViewContainerRef.clear();
     });
   }

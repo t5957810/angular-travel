@@ -1,9 +1,8 @@
-import { ModalService } from './../../shared/component/modal/modal.service';
 import { Component, ComponentFactoryResolver, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ModalComponent } from 'src/app/shared/component/modal/modal.component';
 import { DataStorageService } from 'src/app/shared/data-storage.service';
 import { PlaceholderDirective } from 'src/app/shared/directive/placeholder.directive';
-import { AppConstant, ErrorMessage } from 'src/app/shared/model/app-constant';
+import * as AppConstant from 'src/app/shared/model/app-constant';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -13,17 +12,18 @@ import { Subscription } from 'rxjs';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   @ViewChild(PlaceholderDirective) alertHost: PlaceholderDirective;
+  appConstant = AppConstant;
+
   menuList = [
-    { label: AppConstant.ATTRACTION, routerLink: '/attractions' },
-    { label: AppConstant.FAVORITES, routerLink: '/favorites' },
-    { label: AppConstant.FETCH, routerLink: '' },
+    { label: this.appConstant.Common.ATTRACTION, routerLink: '/attractions' },
+    { label: this.appConstant.Common.FAVORITES, routerLink: '/favorites' },
+    { label: this.appConstant.Common.FETCH, routerLink: '' },
   ];
   closeSub$: Subscription;
 
   constructor(
     private dataStorageService: DataStorageService,
-    private componentFactoryResolver: ComponentFactoryResolver,
-    private modalService: ModalService
+    private componentFactoryResolver: ComponentFactoryResolver
   ) { }
 
   ngOnInit(): void {
@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   onFetch() {
     this.dataStorageService.fetchAttractions().subscribe(() => {
     }, () => {
-      this.showErrorAlert(ErrorMessage.CORS_ERROR);
+      this.showErrorAlert(this.appConstant.ErrorMessage.CORS_ERROR);
     });
   }
 
@@ -45,14 +45,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
     const componentRef = hostViewContainerRef.createComponent(alertComponentFactory);
     componentRef.instance.errorMessage = error;
 
-    this.closeSub$ = componentRef.instance.close$.subscribe((data) => {
+    this.closeSub$ = componentRef.instance.close$.subscribe(() => {
       this.closeSub$.unsubscribe();
       hostViewContainerRef.clear();
     });
   }
 
   ngOnDestroy() {
-
+    this.closeSub$.unsubscribe();
   }
 
 }

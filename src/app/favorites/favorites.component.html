@@ -1,11 +1,11 @@
 <h3 class="isMobile">{{ title }}</h3>
 <ng-container *ngIf="favoritesAttractions.length > 0; else noData">
     <button class="btn btn-danger" type="button" (click)="onClear()" margin-right>
-        清除本地端資料
+        {{ appConstant.Common.CLEAR_LOCAL_STORAGE }}
     </button>
 
     <button class="btn btn-danger" type="button" (click)="onRemoveFavoritesAttractions()">
-        從我的最愛中移除
+        {{ appConstant.Common.REMOVE_FROM_FAVORITES }}
     </button>
 
     <form #f="ngForm" class="overflow-x">
@@ -14,12 +14,12 @@
                 <tr>
                     <td width="5%"></td>
                     <td>Action</td>
-                    <td>{{ attractionText.NAME }}</td>
-                    <td>{{ attractionText.DISTICT }}</td>
-                    <td>{{ attractionText.HOUSEHOLDS }}</td>
-                    <td>{{ attractionText.PERSONS }}</td>
-                    <td>{{ attractionText.FLOORS }}</td>
-                    <td>{{ attractionText.PROGRESS }}</td>
+                    <td>{{ appConstant.AttractionText.NAME }}</td>
+                    <td>{{ appConstant.AttractionText.DISTICT }}</td>
+                    <td>{{ appConstant.AttractionText.HOUSEHOLDS }}</td>
+                    <td>{{ appConstant.AttractionText.PERSONS }}</td>
+                    <td>{{ appConstant.AttractionText.FLOORS }}</td>
+                    <td>{{ appConstant.AttractionText.PROGRESS }}</td>
                 </tr>
             </thead>
             <tbody>
@@ -29,7 +29,7 @@
                             [(ngModel)]="attraction.isSelected">
                     </td>
                     <td> <button class="btn btn-primary " type="button" (click)="onEdit(attraction, i)">
-                            編輯
+                            {{ appConstant.Common.EDIT }}
                         </button>
                     </td>
                     <td> <span>{{ attraction.name }}</span></td>
@@ -44,17 +44,25 @@
     </form>
     <nav>
         <ul class="pagination">
-            <li class="page-item"><a class="page-link" (click)="changePage('previous')">Previous</a></li>
+            <li class="page-item">
+                <a class="page-link" (click)="changePage('previous')">
+                    {{ appConstant.PaginationText.PREVIOUS }}
+                </a>
+            </li>
             <div class="d-flex overflow-x">
                 <li class="page-item" [ngClass]="{'active': page === pagination.pageStart}"
                     *ngFor="let page of pagination.pageList">
                     <a class="page-link" (click)="changePage('change', page)">{{ page }}</a>
                 </li>
             </div>
-            <li class="page-item"><a class="page-link" (click)="changePage('next')">Next</a></li>
+            <li class="page-item">
+                <a class="page-link" (click)="changePage('next')">
+                    {{ appConstant.PaginationText.NEXT }}
+                </a>
+            </li>
         </ul>
     </nav>
 </ng-container>
 
-<ng-template #noData>本地端尚未有儲存之資料。</ng-template>
+<ng-template #noData>{{ appConstant.Common.NO_LOCAL_STORAGE_DATA }}</ng-template>
 <ng-template appPlaceholder></ng-template>

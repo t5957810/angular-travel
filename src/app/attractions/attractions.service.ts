@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { FavoritesService } from '../favorites/favorites.service';
-import { AppConstant } from '../shared/model/app-constant';
+import * as AppConstant from '../shared/model/app-constant';
 import { ShareUtil } from '../shared/model/shareUtil.class';
 import { Attraction } from './model/attraction.class';
 
@@ -9,6 +9,7 @@ import { Attraction } from './model/attraction.class';
   providedIn: 'root'
 })
 export class AttractionsService {
+  appConstant = AppConstant;
   attractions: Attraction[] = [];
   attractionsChanged$ = new Subject<Attraction[]>();
 
@@ -24,7 +25,7 @@ export class AttractionsService {
 
   get disticts() {
     const disticts = [...new Set(this.attractions.map((item: Attraction) => item.distict))];
-    disticts.unshift(AppConstant.ALL_DISTICT);
+    disticts.unshift(this.appConstant.Common.ALL_DISTICT);
     return disticts;
   }
 

@@ -1,2 +1,63 @@
-<h3 class="isMobile">{{ title }}</h3>
-<app-attraction-list></app-attraction-list>
+<h3 class="isMobile">{{ appConstant.Common.ATTRACTION }}</h3>
+<ng-container *ngIf="attractions.length > 0;else noData">
+    <div class="dropdown">
+        <div class="inline-block" appDropdown #r="appDropdown" margin-right>
+            <input [(ngModel)]="selectedDistict" readonly />
+        </div>
+        <div class="inline-block">
+            <button class="btn btn-primary" type="button" (click)="addFavorites()">
+                {{ appConstant.Common.ADD_TO_FAVORITES }}
+            </button>
+        </div>
+        <ul class="dropdown-menu" [ngClass]="(r.isDropdownOpen) ? 'show' : ''">
+            <li *ngFor="let distict of disticts"><a class="dropdown-item"
+                    (click)="selectDistict(distict)">{{ distict }}</a>
+            </li>
+        </ul>
+    </div>
+
+    <form #f="ngForm" class="overflow-x">
+        <table class="table" margin-top>
+            <thead>
+                <tr>
+                    <td width="5%"></td>
+                    <td>{{ appConstant.AttractionText.NAME }}</td>
+                    <td>{{ appConstant.AttractionText.DISTICT }}</td>
+                    <td>{{ appConstant.AttractionText.HOUSEHOLDS }}</td>
+                    <td>{{ appConstant.AttractionText.PERSONS }}</td>
+                    <td>{{ appConstant.AttractionText.FLOORS }}</td>
+                    <td>{{ appConstant.AttractionText.PROGRESS }}</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let attraction of filteredPageAttractions; let i = index;">
+                    <td>
+                        <input type="checkbox" [checked]="attraction.isSelected" name="id{{ i }}" ngModel
+                            [(ngModel)]="attraction.isSelected">
+                    </td>
+                    <td> <span>{{ attraction.name }}</span></td>
+                    <td><span>{{ attraction.distict }}</span></td>
+                    <td><span>{{ attraction.houseHolds }}</span></td>
+                    <td><span>{{ attraction.persons }}</span></td>
+                    <td><span>{{ attraction.floors }}</span></td>
+                    <td><span>{{ attraction.progress }}</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+    <nav>
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link"
+                    (click)="changePage('previous')">{{ appConstant.PaginationText.PREVIOUS }}</a></li>
+            <div class="d-flex overflow-x">
+                <li class="page-item" [ngClass]="{'active': page === pagination.pageStart}"
+                    *ngFor="let page of pagination.pageList">
+                    <a class="page-link" (click)="changePage('change', page)">{{ page }}</a>
+                </li>
+            </div>
+            <li class="page-item"><a class="page-link"
+                    (click)="changePage('next')">{{ appConstant.PaginationText.NEXT }}</a></li>
+        </ul>
+    </nav>
+</ng-container>
+<ng-template #noData>{{ appConstant.Common.NO_DATA }}</ng-template>

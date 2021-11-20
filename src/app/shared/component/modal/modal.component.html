@@ -13,48 +13,50 @@
                 <div class="modal-body">
                     <form [formGroup]="form" class="form">
                         <div>
-                            <label class="form-label required">{{ attractionText.NAME }}</label>
+                            <label class="form-label required">{{ appConstant.AttractionText.NAME }}</label>
                             <input formControlName="name" class="form-control">
                             <span *ngIf="!form.get('name').valid && form.get('name').touched" class="error-text">
-                                請輸入{{ attractionText.NAME }}
+                                {{ appConstant.Common.PLEASE_ENTER }}{{ appConstant.AttractionText.NAME }}
                             </span>
                         </div>
                         <div>
-                            <label class="form-label required">{{ attractionText.DISTICT }}</label>
+                            <label class="form-label required">{{ appConstant.AttractionText.DISTICT }}</label>
                             <input formControlName="distict" class="form-control">
                             <span *ngIf="!form.get('distict').valid && form.get('distict').touched" class="error-text">
-                                請輸入{{ attractionText.DISTICT }}
+                                {{ appConstant.Common.PLEASE_ENTER }}{{ appConstant.AttractionText.DISTICT }}
                             </span>
                         </div>
                         <div>
-                            <label class="form-label">{{ attractionText.HOUSEHOLDS }}</label>
+                            <label class="form-label">{{ appConstant.AttractionText.HOUSEHOLDS }}</label>
                             <input formControlName="houseHolds" type="number" class="form-control">
                             <span *ngIf="!form.get('houseHolds').valid && form.get('houseHolds').touched" class="error-text">
-                                {{ errorMessageText.POSITIVE_5_INTEGER_ONLY }}
+                                {{ appConstant.ErrorMessage.POSITIVE_5_INTEGER_ONLY }}
                             </span>
                         </div>
                         <div>
-                            <label class="form-label">{{ attractionText.PERSONS }}</label>
+                            <label class="form-label">{{ appConstant.AttractionText.PERSONS }}</label>
                             <input formControlName="persons" type="number" class="form-control">
                             <span *ngIf="!form.get('persons').valid && form.get('persons').touched" class="error-text">
-                                {{ errorMessageText.POSITIVE_5_INTEGER_ONLY }}
+                                {{ appConstant.ErrorMessage.POSITIVE_5_INTEGER_ONLY }}
                             </span>
                         </div>
                         <div>
-                            <label class="form-label">{{ attractionText.FLOORS }}</label>
+                            <label class="form-label">{{ appConstant.AttractionText.FLOORS }}</label>
                             <input formControlName="floors" class="form-control">
                         </div>
                         <div>
-                            <label class="form-label required">{{ attractionText.PROGRESS }}</label>
+                            <label class="form-label required">{{ appConstant.AttractionText.PROGRESS }}</label>
                             <input formControlName="progress" class="form-control">
                             <span *ngIf="!form.get('progress').valid && form.get('progress').touched" class="error-text">
-                                請輸入{{ attractionText.PROGRESS }}
+                                {{ appConstant.Common.PLEASE_ENTER }}{{ appConstant.AttractionText.PROGRESS }}
                             </span>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" [disabled]="!form.valid" (click)="onSave()">儲存</button>
+                    <button type="button" class="btn btn-primary" [disabled]="!form.valid" (click)="onSave()">
+                        {{ appConstant.Common.SAVE }}
+                    </button>
                 </div>
             </ng-template>
         </div>
