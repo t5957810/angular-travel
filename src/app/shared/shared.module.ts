@@ -2,12 +2,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DropdownDirective } from './directive/dropdown.directive';
-import { TableComponent } from './component/table/table.component';
+import { SidenavDirective } from './directive/sidenav.directive';
+import { ModalComponent } from './component/modal/modal.component';
+import { PlaceholderDirective } from './directive/placeholder.directive';
 
 @NgModule({
   declarations: [
     DropdownDirective,
-    TableComponent
+    SidenavDirective,
+    ModalComponent,
+    PlaceholderDirective
   ],
   imports: [
     CommonModule,
@@ -18,7 +22,10 @@ import { TableComponent } from './component/table/table.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    DropdownDirective
+    DropdownDirective,
+    SidenavDirective,
+    PlaceholderDirective,
+    ModalComponent
   ]
 })
 export class SharedModule { }

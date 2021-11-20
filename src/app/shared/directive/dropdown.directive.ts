@@ -3,7 +3,6 @@ import { Directive, ElementRef, HostBinding, HostListener, Renderer2, ViewChild 
 @Directive({
   selector: '[appDropdown]',
 	exportAs: 'appDropdown' 
-
 })
 export class DropdownDirective {
   // dropdown 是否開啟

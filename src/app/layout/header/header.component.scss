@@ -6,8 +6,6 @@
     font-weight: 600;
 
     ul {
-        display: flex;
-        flex-direction: row;
         padding: 0;
         margin: 0;
     }
@@ -23,13 +21,93 @@
         line-height: 60px;
         padding: 0 8px 0 8px;
         display: block;
-        &:hover {
-            background: rgba(255,255,255, 0.15);
-        }
+
         &.active {
             background: rgba(255, 255, 255, 0.45);
         }
     }
+}
 
+@media screen and (min-width: 501px) {
+    .toolbar {
+        a {
+            &:hover {
+                background: rgba(255, 255, 255, 0.15);
+            }
+        }
+    }
 
+    .sidebar {
+        display: none;
+    }
+
+    .desktop {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .mobile {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .desktop {
+        display: none;
+    }
+
+    .toolbar > .mobile {
+        display: flex;
+        flex-direction: row;
+        list-style-type: none;
+
+        .icon > a {
+            width: 40px;
+            text-align: center;
+            &:hover {
+                background: rgba(255, 255, 255, 0.15);
+            }
+        }
+    }
+
+    .sidenav {
+        background-color: #fff;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 5;
+        overflow-y: auto;
+        overflow-x: hidden;
+        transition: 0.3s;
+        padding-top: 60px;
+        transform: translate3d(-100%, 0, 0);
+        &.show {
+            transform: translate3d(0%, 0, 0);
+        }
+
+        .mobile {
+            flex-direction: column;
+            li {
+                list-style-type: none;
+                padding: 8px;
+                &:hover {
+                    background: rgba(201, 201, 201, 0.45);
+                }   
+                a {
+                    width: 100%;
+                    
+                }
+            }
+        }
+    }
+    .backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.75);
+        z-index: 1;
+    }
 }

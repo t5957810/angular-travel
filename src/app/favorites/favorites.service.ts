@@ -28,10 +28,16 @@ export class FavoritesService {
 
   autoGetFavoritesAttractions() {
     const favoritesData = JSON.parse(localStorage.getItem('favoritesData'));
-    if(!favoritesData) {
+    if (!favoritesData) {
       return;
     }
     this.setFavoritesAttractions(favoritesData);
+  }
+
+  updateFavoritesAttraction(index: number, newAttraction: Attraction) {
+    this.favoritesAttractions[index] = newAttraction;
+    this.favoritesAttractionsChanged$.next(this.getFavoritesAttractions());
+    this.updateLocalStorage();
   }
 
   // 把isSelected 是true的移除

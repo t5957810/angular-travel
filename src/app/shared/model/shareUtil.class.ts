@@ -4,10 +4,9 @@ export class ShareUtil {
 
   // 取消勾選
   static unselectedAttractions(attractions: Attraction[]) {
-    return attractions.map(
-      (item: Attraction) => {
-        return { ...item, isSelected: false };
-      }
-    );
+    for(const each of attractions) {
+      each.unselected();
+    }
+    return attractions;
   }
 }

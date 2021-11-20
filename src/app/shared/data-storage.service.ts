@@ -17,7 +17,16 @@ export class DataStorageService {
     return this.http.get(environment.defaultAPI).pipe(
       tap((attractionList: Attraction[]) => {
         const list = attractionList.map((each: Attraction) =>
-          new Attraction(each.address, each.distict, each.floors, each.houseHolds, each.lat, each.lng, each.name, each.persons, each.progress));
+          new Attraction(
+            each.name, 
+            each.distict, 
+            each.address, 
+            each.lat, 
+            each.lng, 
+            each.houseHolds, 
+            each.persons, 
+            each.floors, 
+            each.progress));
         this.attractionsService.setAttractions(list);
       })
     );

@@ -7,9 +7,6 @@
             <button class="btn btn-primary" type="button" (click)="addFavorites()">
                 加到我的最愛
             </button>
-            <button class="btn btn-primary" type="button" (click)="log()">
-                log
-            </button>
         </div>
         <ul class="dropdown-menu" [ngClass]="(r.isDropdownOpen) ? 'show' : ''">
             <li *ngFor="let distict of disticts"><a class="dropdown-item"
@@ -23,12 +20,12 @@
             <thead>
                 <tr>
                     <td width="5%"></td>
-                    <td>名稱</td>
-                    <td>區域</td>
-                    <td>規劃戶數</td>
-                    <td>居住人口</td>
-                    <td>樓層數</td>
-                    <td>興建進度</td>
+                    <td>{{ attractionText.NAME }}</td>
+                    <td>{{ attractionText.DISTICT }}</td>
+                    <td>{{ attractionText.HOUSEHOLDS }}</td>
+                    <td>{{ attractionText.PERSONS }}</td>
+                    <td>{{ attractionText.FLOORS }}</td>
+                    <td>{{ attractionText.PROGRESS }}</td>
                 </tr>
             </thead>
             <tbody>

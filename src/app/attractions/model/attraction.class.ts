@@ -1,15 +1,19 @@
+
 export class Attraction {
     constructor(
-        public address,
+        public name,
         public distict,
-        public floors,
-        public houseHolds,
+        public address,
         public lat,
         public lng,
-        public name,
+        public houseHolds,
         public persons,
+        public floors,
         public progress,
         public isSelected = false
-    ) {
+    ) {}
+
+    unselected() {
+        this.isSelected = false;
     }
 }

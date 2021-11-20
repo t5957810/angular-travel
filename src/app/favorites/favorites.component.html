@@ -1,3 +1,4 @@
+<h3 class="isMobile">{{ title }}</h3>
 <ng-container *ngIf="favoritesAttractions.length > 0; else noData">
     <button class="btn btn-danger" type="button" (click)="onClear()" margin-right>
         清除本地端資料
@@ -12,12 +13,13 @@
             <thead>
                 <tr>
                     <td width="5%"></td>
-                    <td>名稱</td>
-                    <td>區域</td>
-                    <td>規劃戶數</td>
-                    <td>居住人口</td>
-                    <td>樓層數</td>
-                    <td>興建進度</td>
+                    <td>Action</td>
+                    <td>{{ attractionText.NAME }}</td>
+                    <td>{{ attractionText.DISTICT }}</td>
+                    <td>{{ attractionText.HOUSEHOLDS }}</td>
+                    <td>{{ attractionText.PERSONS }}</td>
+                    <td>{{ attractionText.FLOORS }}</td>
+                    <td>{{ attractionText.PROGRESS }}</td>
                 </tr>
             </thead>
             <tbody>
@@ -25,6 +27,10 @@
                     <td>
                         <input type="checkbox" [checked]="attraction.isSelected" name="id{{ i }}" ngModel
                             [(ngModel)]="attraction.isSelected">
+                    </td>
+                    <td> <button class="btn btn-primary " type="button" (click)="onEdit(attraction, i)">
+                            編輯
+                        </button>
                     </td>
                     <td> <span>{{ attraction.name }}</span></td>
                     <td><span>{{ attraction.distict }}</span></td>
@@ -51,3 +57,4 @@
 </ng-container>
 
 <ng-template #noData>本地端尚未有儲存之資料。</ng-template>
+<ng-template appPlaceholder></ng-template>

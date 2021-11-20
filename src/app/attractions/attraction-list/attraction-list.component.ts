@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { AppConstant } from 'src/app/shared/model/app-constant';
+import { AppConstant, AttractionText } from 'src/app/shared/model/app-constant';
 import { AttractionsService } from '../attractions.service';
 import { Attraction } from '../model/attraction.class';
 import * as _ from 'lodash';
@@ -18,6 +18,7 @@ export class AttractionListComponent implements OnInit, OnDestroy {
   disticts: string[] = [];
   attractionsSubscription$: Subscription;
   pagination = new Pagination();
+  attractionText = AttractionText;
 
   selectedDistict = AppConstant.ALL_DISTICT;
 
@@ -85,9 +86,4 @@ export class AttractionListComponent implements OnInit, OnDestroy {
     this.attractionsService.addAttractionsToFavoritesList(favorites);
     this.attractionsService.resetSelectState();
   }
-
-  log() {
-    console.log('filteredAttractions= ', this.filteredAttractions);
-  }
-
 }

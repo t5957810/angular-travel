@@ -1,0 +1,63 @@
+<div class="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" (click)="onClose()">X</button>
+            </div>
+            <ng-container *ngIf="errorMessage; else normal">
+                <div class="modal-body">
+                    <h4 red-text text-center>{{ errorMessage }}</h4>
+                </div>
+            </ng-container>
+            <ng-template #normal>
+                <div class="modal-body">
+                    <form [formGroup]="form" class="form">
+                        <div>
+                            <label class="form-label required">{{ attractionText.NAME }}</label>
+                            <input formControlName="name" class="form-control">
+                            <span *ngIf="!form.get('name').valid && form.get('name').touched" class="error-text">
+                                請輸入{{ attractionText.NAME }}
+                            </span>
+                        </div>
+                        <div>
+                            <label class="form-label required">{{ attractionText.DISTICT }}</label>
+                            <input formControlName="distict" class="form-control">
+                            <span *ngIf="!form.get('distict').valid && form.get('distict').touched" class="error-text">
+                                請輸入{{ attractionText.DISTICT }}
+                            </span>
+                        </div>
+                        <div>
+                            <label class="form-label">{{ attractionText.HOUSEHOLDS }}</label>
+                            <input formControlName="houseHolds" type="number" class="form-control">
+                            <span *ngIf="!form.get('houseHolds').valid && form.get('houseHolds').touched" class="error-text">
+                                {{ errorMessageText.POSITIVE_5_INTEGER_ONLY }}
+                            </span>
+                        </div>
+                        <div>
+                            <label class="form-label">{{ attractionText.PERSONS }}</label>
+                            <input formControlName="persons" type="number" class="form-control">
+                            <span *ngIf="!form.get('persons').valid && form.get('persons').touched" class="error-text">
+                                {{ errorMessageText.POSITIVE_5_INTEGER_ONLY }}
+                            </span>
+                        </div>
+                        <div>
+                            <label class="form-label">{{ attractionText.FLOORS }}</label>
+                            <input formControlName="floors" class="form-control">
+                        </div>
+                        <div>
+                            <label class="form-label required">{{ attractionText.PROGRESS }}</label>
+                            <input formControlName="progress" class="form-control">
+                            <span *ngIf="!form.get('progress').valid && form.get('progress').touched" class="error-text">
+                                請輸入{{ attractionText.PROGRESS }}
+                            </span>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" [disabled]="!form.valid" (click)="onSave()">儲存</button>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>
+<div class="backdrop"></div>

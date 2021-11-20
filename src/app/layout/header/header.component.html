@@ -1,13 +1,32 @@
 <div class="toolbar">
-    <ul>
-        <li>
-            <a routerLinkActive="active" [routerLink]="['/attractions']">不動產經紀營業員訓練機構清單</a>
+    <ul class="desktop">
+        <li *ngFor="let menu of menuList">
+            <ng-container *ngIf="menu.routerLink; else fetch">
+                <a routerLinkActive="active" [routerLink]="[menu.routerLink]">{{ menu.label }}</a>
+            </ng-container>
+            <ng-template #fetch>
+                <a (click)="onFetch()">{{ menu.label }}</a>
+            </ng-template>
         </li>
-        <li>
-            <a routerLinkActive="active" [routerLink]="['/favorites']">我的最愛清單</a>
-        </li>
-        <li>
-            <a (click)="onFetch()">取得清單</a>
+    </ul>
+    <ul class="mobile">
+        <li class="icon">
+            <a appSidenav #s="appSidenav">&#9776;</a>
         </li>
     </ul>
 </div>
+
+<div [ngClass]="(s.isSidenavOpen) ? 'backdrop' : ''"></div>
+<div class="sidenav" [ngClass]="(s.isSidenavOpen) ? 'show' : ''">
+    <div class="mobile">
+        <li *ngFor="let menu of menuList">
+            <ng-container *ngIf="menu.routerLink; else fetch">
+                <a routerLinkActive="active" [routerLink]="[menu.routerLink]">{{ menu.label }}</a>
+            </ng-container>
+            <ng-template #fetch>
+                <a (click)="onFetch()">{{ menu.label }}</a>
+            </ng-template>
+        </li>
+    </div>
+</div>
+<ng-template appPlaceholder></ng-template>
