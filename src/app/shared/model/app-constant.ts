@@ -12,7 +12,8 @@ export enum Common {
   CLEAR_LOCAL_STORAGE= '清除本地端所有資料',
   REMOVE_FROM_FAVORITES= '從我的最愛中移除',
   NO_LOCAL_STORAGE_DATA= '本地端尚未有儲存之資料。',
-  NO_DATA= '沒有資料。'
+  NO_DATA= '沒有資料。',
+  GET_DATA= '成功取得資料'
 }
 
 export enum PaginationText {

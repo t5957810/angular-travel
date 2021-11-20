@@ -89,7 +89,7 @@ export class FavoritesComponent implements OnInit, OnDestroy {
   }
 
   onClear() {
-    this.favoritesService.clearLocalStorage();
+    this.favoritesService.removeAll();
   }
 
   onRemoveFavoritesAttractions() {

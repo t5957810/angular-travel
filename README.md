@@ -2,6 +2,9 @@
 
 demo 網址：https://t5957810.github.io/angular-travel-demo/
 
+API
+https://data.taipei/#/dataset/detail?id=659c3565-df41-4f80-915f-95e83071bdcd
+
 ## 功能：
 * 網頁 1-資料列表 (包含分頁)。 舉例:列出所有景點資訊，並可切換「上一頁」、「下一頁」
 * 資料可篩選。 舉例:以下拉式選單切換不同分類編號(categoryIds)，得到不同的景點資料列表
