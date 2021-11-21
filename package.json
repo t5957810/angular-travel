@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "github": "ng build --prod --base-href https://t5957810.github.io/angular-travel-demo/ && npm run create404page",
-    "create404page": "cp dist/index.html dist/404.html",
+    "create404page": "cp dist/index.html dist/404.html && npm run copyReadme",
+    "copyReadme": "cp README.md dist/README.md",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
