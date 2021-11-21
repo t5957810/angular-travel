@@ -28,14 +28,14 @@
                         </div>
                         <div>
                             <label class="form-label">{{ appConstant.AttractionText.HOUSEHOLDS }}</label>
-                            <input formControlName="houseHolds" type="number" class="form-control">
+                            <input formControlName="houseHolds"  class="form-control">
                             <span *ngIf="!form.get('houseHolds').valid && form.get('houseHolds').touched" class="error-text">
                                 {{ appConstant.ErrorMessage.POSITIVE_5_INTEGER_ONLY }}
                             </span>
                         </div>
                         <div>
                             <label class="form-label">{{ appConstant.AttractionText.PERSONS }}</label>
-                            <input formControlName="persons" type="number" class="form-control">
+                            <input formControlName="persons"  class="form-control">
                             <span *ngIf="!form.get('persons').valid && form.get('persons').touched" class="error-text">
                                 {{ appConstant.ErrorMessage.POSITIVE_5_INTEGER_ONLY }}
                             </span>
