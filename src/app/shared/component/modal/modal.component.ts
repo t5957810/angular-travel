@@ -25,7 +25,7 @@ export class ModalComponent implements OnInit {
 
 
   private initForm(data: Attraction) {
-    if(!data) {
+    if (!data) {
       return;
     }
     this.form = new FormGroup({
@@ -42,11 +42,20 @@ export class ModalComponent implements OnInit {
     this.close$.next(null);
   }
 
-  onSave() {   
-    if(!this.form.valid) {
+  onSave() {
+    this.trimForm();
+    if (!this.form.valid) {
       return;
     }
     this.close$.next(this.form.value);
+  }
+
+  private trimForm() {
+    Object.keys(this.form.controls).forEach((key) => {
+      if (this.form.get(key).value) {
+        this.form.get(key).patchValue(this.form.get(key).value.trim())
+      }
+    });
   }
 
 }
